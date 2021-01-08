@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 import BackToHomeButton from '../components/BackToHomeButton'
-import DefaultImg from '../components/bgimage.jpeg'
+//import DefaultImg from '../components/bgimage.jpeg'
+import UploadImage from "../components/UploadImage"
 
 function ProducePage() {
     const [file, setFile] = useState("")
@@ -40,7 +41,6 @@ function ProducePage() {
         const received = await sentImage.json()
         setDisplay(received)
     }
-
 
 
     return (
