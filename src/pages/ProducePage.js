@@ -6,9 +6,22 @@ import DefaultImg from '../components/bgimage.jpeg'
 function ProducePage() {
     const [file, setFile] = useState("")
     const [display,setDisplay] = useState("")
-    const handleFileSelected = event => {
-        setFile(event.target.files[0])
+    
+    
+    const onFileChange = event => {
+      setFile(event.target.files[0])
     }
+
+    const onSubmit = event => {
+        event.preventDefault()
+        const formData = new FormData()
+        formData.append('profileImg', file)
+        axios.post("/api/user-profile", formData, {
+        }).then(res => {
+            console.log(res)
+        })
+    }
+    
     const saveFileSelected = async () => {
         if(file === '') return
         const getRes = await axios.get('/api/produce')
@@ -28,66 +41,15 @@ function ProducePage() {
         setDisplay(received)
     }
 
-    const setDefaultImage = (uploadType) => {
-        if (uploadType === "multer") {
-          this.setState({
-            multerImage: DefaultImg
-          })
-        } else if (uploadType === "firebase") {
-          this.setState({
-            firebaseImage: DefaultImg
-          })
-        } else {
-          this.setState({
-            baseImage: DefaultImg
-          })
-        }
-    }
 
-    // function to upload image once it has been captured
-    // includes multer and firebase methods
-    const API_URL = "http://localhost:3000";
-
-    const uploadImage = (e, method) => {
-    let imageObj = {}
-
-    if (method === "multer") {
-
-      let imageFormObj = new FormData()
-
-      imageFormObj.append("imageName", "multer-image-" + Date.now())
-      imageFormObj.append("imageData", e.target.files[0])
-
-      // stores a readable instance of 
-      // the image being uploaded using multer
-      this.setState({
-        multerImage: URL.createObjectURL(e.target.files[0])
-      })
-
-      axios.post(`${API_URL}/image/uploadmulter`, imageFormObj)
-        .then((data) => {
-          if (data.data.success) {
-            alert("Image has been successfully uploaded using multer");
-            this.setDefaultImage("multer");
-          }
-        })
-        .catch((err) => {
-          alert("Error while uploading image using multer");
-          this.setDefaultImage("multer");
-        })
-    }
-    }
 
     return (
         <>
         <h1>actual app!!!</h1>
-        <input type="file" className="process__upload-btn" onChange={(e) => this.uploadImage(e, "multer")} />
-        <img src={this.state.multerImage} alt="upload-image" className="process__image" />
-
-        <input type="file" onChange={handleFileSelected}/>
+        <input type="file" onChange={onFileChange}/>
         <label>click to upload image of your produce</label>
         <p>warning: giving us your image gives permission to post it on twitter!!!</p>
-        <button onClick={saveFileSelected}>click to evaluate your produce</button><br/>
+        <button onClick={onSubmit}>click to evaluate your produce</button><br/>
         <BackToHomeButton/>
         {display !== "" && <p>display</p>}
         </>
