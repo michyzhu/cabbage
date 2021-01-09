@@ -16,32 +16,14 @@ function ProducePage() {
         event.preventDefault()
         const formData = new FormData()
         formData.append('profileImg', file)
+        
         axios.post("/api/user-profile", formData, {
         }).then(res => {
             console.log(res)
-            console.log(`the message name? ${res.data.message}`)
-            const {fileName, newFileURL} = res.data.userCreated
-            setDisplay(newFileURL)
+            const {profileImg} = res.data.userCreated
+            console.log(profileImg)
+            setDisplay(profileImg)
         })
-    }
-    
-    const saveFileSelected = async () => {
-        if(file === '') return
-        const getRes = await axios.get('/api/produce')
-
-        var fd = new FormData()
-        fd.append('image',file,file.name)
-        console.log(fd)
-        const sentImage = await axios.post('/api/produce/upload-file',fd, {
-            onUploadProgress: progressEvent => {
-                console.log('Upload Progress: ' + Math.round(100 * progressEvent.loaded / progressEvent.total))
-            }
-        })
-            .then(res => {
-                console.log(res)
-            })
-        const received = await sentImage.json()
-        setDisplay(received)
     }
 
 
@@ -56,8 +38,7 @@ function ProducePage() {
         <button onClick={onSubmit}>click to evaluate your produce</button>
         <br/><br/>
         <BackToHomeButton/>
-        <img src={file} alt='image should show here'/>
-        {display !== "" && <p>display</p>}
+        {display !== "" && <img src={display} alt='image should show here'/>}
         </>
     )
 }
