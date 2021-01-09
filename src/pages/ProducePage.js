@@ -1,12 +1,12 @@
 import React, {useState} from 'react'
 import axios from 'axios'
 import BackToHomeButton from '../components/BackToHomeButton'
-//import DefaultImg from '../components/bgimage.jpeg'
+import * as tf from '@tensorflow/tfjs'
 
 function ProducePage() {
     const [file, setFile] = useState("")
     const [display,setDisplay] = useState("")
-    
+    const [result, setResult] = useState("")
     
     const onFileChange = event => {
       setFile(event.target.files[0])
@@ -18,11 +18,16 @@ function ProducePage() {
         formData.append('profileImg', file)
         
         axios.post("/api/user-profile", formData, {
-        }).then(res => {
+        }).then(async res => {
             console.log(res)
             const {profileImg} = res.data.userCreated
             console.log(profileImg)
-            setDisplay(profileImg)
+            setDisplay(<img src={display} alt='image should show here'/>)
+
+            const model = await tf.loadLayersModel('http://localhost:8000/public/models/applesModel.json');
+            const example = tf.browser.fromPixels(display);  // for example
+            const prediction = model.predict(example);
+            setResult(prediction)
         })
     }
 
@@ -36,8 +41,11 @@ function ProducePage() {
         <p>warning: giving us your image gives permission to post it on twitter!!!</p>
         <button onClick={onSubmit}>click to evaluate your produce</button>
         <br/><br/>
-        <BackToHomeButton/>
         {display !== "" && <img src={display} alt='image should show here'/>}
+        <br/>
+        {result !== "" && <p> Our prediction is: {result} </p>}
+        <br/><br/>
+        <BackToHomeButton/>
         </>
     )
 }
