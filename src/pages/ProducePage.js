@@ -19,7 +19,7 @@ function ProducePage() {
         axios.post("/api/user-profile", formData, {
         }).then(res => {
             console.log(res)
-            console.log(`the message name? ${res.data}`)
+            console.log(`the message name? ${res.data.message}`)
             const {fileName, newFileURL} = res.data.userCreated
             setDisplay(newFileURL)
         })
