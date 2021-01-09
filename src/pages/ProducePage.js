@@ -47,8 +47,11 @@ function ProducePage() {
         <h1>actual app!!!</h1>
         <input type="file" onChange={onFileChange}/>
         <label>click to upload image of your produce</label>
+        <br />
+        <img src={file} alt='image should show here'/>
         <p>warning: giving us your image gives permission to post it on twitter!!!</p>
-        <button onClick={onSubmit}>click to evaluate your produce</button><br/>
+        <button onClick={onSubmit}>click to evaluate your produce</button>
+        <br/><br/>
         <BackToHomeButton/>
         <img src={file} alt='image should show here'/>
         {display !== "" && <p>display</p>}
