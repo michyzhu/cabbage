@@ -106,7 +106,6 @@ function ProducePage() {
 
     return (
         <>
-<<<<<<< HEAD
         <div class="body">
             <h1>actual app!!!</h1>
             <input type="file" onChange={onFileChange}/>
@@ -121,20 +120,6 @@ function ProducePage() {
             <br/><br/>
             <BackToHomeButton/>
         </div>
-=======
-        <h1>actual app!!!</h1>
-        <input type="file" onChange={onFileChange}/>
-        <label>click to upload image of your produce</label>
-        <br />
-        <p>warning: giving us your image gives permission to post it on twitter!!!</p>
-        <button onClick={onSubmit}>click to evaluate your produce</button>
-        <br/><br/>
-        {display !== "" && display}
-        <br/>
-        {result !== "" && <p> Our prediction is: {result} </p>}
-        <br/><br/>
-        <BackToHomeButton/>
->>>>>>> 42aab92841772c23679d90d63607ecda1b6b851c
         </>
     )
 }
