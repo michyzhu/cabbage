@@ -5,18 +5,26 @@ import {Link} from "react-router-dom"
 function HomePage() {
     return (
         <>
-        <h1>produce homepage</h1>
-        <Link to="/produce">
-            <Button className="main-button">
-                <p>click to go to app</p>
-            </Button>
-        </Link>
-        <br/>
-        <Link to="/about">
-            <Button className="about-button">
-                <p>about us</p>
-            </Button>
-        </Link>
+        <div class="body">
+            <div class="home">
+                <h1>how's your</h1>
+                <h1>produce?</h1>
+                <br/>
+                <p>we can tell you when your produce will go bad.</p>
+                <br/>
+                <Link to="/app">
+                    <Button className="main-button">
+                        <p>try it</p>
+                    </Button>
+                </Link>
+                <br/>
+                {/* <Link to="/about">
+                    <Button className="about-button">
+                        <p>about us</p>
+                    </Button>
+                </Link> */}
+            </div>
+        </div>
         </>
     )
 }

@@ -6,12 +6,8 @@ function AboutPage() {
     return (
         <>
         <div class="body">
-            <h1>produce about page</h1>
-            <Link to="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-                <label>link to our github</label>
-            </Link>
-            <p>blah blah text about us</p>
-            <p>contact form</p>
+            <h1>say hi to our bot</h1>
+            <p>want an ugly twitter bot? you have come to the right place.</p>
             <BackToHomeButton/>
         </div>
         </>

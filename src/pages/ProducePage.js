@@ -34,18 +34,20 @@ function ProducePage() {
 
     return (
         <>
-        <h1>actual app!!!</h1>
-        <input type="file" onChange={onFileChange}/>
-        <label>click to upload image of your produce</label>
-        <br />
-        <p>warning: giving us your image gives permission to post it on twitter!!!</p>
-        <button onClick={onSubmit}>click to evaluate your produce</button>
-        <br/><br/>
-        {display !== "" && <img src={display} alt='image should show here'/>}
-        <br/>
-        {result !== "" && <p> Our prediction is: {result} </p>}
-        <br/><br/>
-        <BackToHomeButton/>
+        <div class="body">
+            <h1>actual app!!!</h1>
+            <input type="file" onChange={onFileChange}/>
+            <label>click to upload image of your produce</label>
+            <br />
+            <p>warning: giving us your image gives permission to post it on twitter!!!</p>
+            <button onClick={onSubmit}>click to evaluate your produce</button>
+            <br/><br/>
+            {display !== "" && display}
+            <br/>
+            {result !== "" && <p> Our prediction is: {result} </p>}
+            <br/><br/>
+            <BackToHomeButton/>
+        </div>
         </>
     )
 }
