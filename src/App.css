@@ -6,17 +6,17 @@
 @font-face {
   font-family: "Metropolis_Medium";
   src: url(./fonts/metropolis-medium.otf);
-  /* font-weight: 500; medium */
 }
 
 @font-face {
   font-family: "Metropolis_ExtraBold";
   src: url(./fonts/metropolis-extrabold.otf);
-  /* font-weight: 600; */
 }
 
 .App {
   text-align: center;
+  margin: 0px;
+  padding: 0px;
   background-color: #f0d3ae;
 }
 
@@ -99,15 +99,30 @@ nav a {
 
 nav a:hover {
   /* background: black; */
-  color: #07714c;
+  color: #91b934;
+}
+
+.back-to-home {
+  background-color: #07714c;
+  padding: 0px 15px; 
+  border: none;
+  border-radius: 12px;
+  float: center;
+}
+
+.back-to-home p {
+  color: #91b934;
+  font-family: "Metropolis_ExtraBold";
+  padding-top: 10px;
+  font-size:20px;
+  text-align: center;
+  margin: none;
 }
 
 .home {
-  margin: 0;
   position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+  top: 25%;
+  padding-left: 5%;
 }
 
 .home h1 {
@@ -115,8 +130,7 @@ nav a:hover {
   font-family: "Metropolis_ExtraBold";
   font-size: 130px;
   line-height: 100%;
-  text-align: left;
-  padding-left: 50px;
+  /* text-align: left; */
 }
 
 .home p {
@@ -137,13 +151,90 @@ nav a:hover {
 }
 
 .main-button p {
-  color: #a7c462;
+  color: #91b934;
   font-family: "Metropolis_ExtraBold";
   padding-left: 0px;
   padding-top: 10px;
   font-size:30px;
   text-align: center;
   margin: none;
+  line-height: 40px;
+}
+
+.about h1 {
+  color: #07714c;
+  font-family: "Metropolis_ExtraBold";
+  text-align: center;
+  font-size:90px;
+}
+
+.about p {
+  color: #07714c;
+  font-family: "Metropolis_Medium";
+  text-align: left;
+  font-size: 20px;
+  padding-left: 15%;
+  padding-right: 15%
+}
+
+.about a {
+  color: #7b4a0d;
+  font-family: "Metropolis_Medium";
+  font-size: 20px;
+}
+
+.about a:hover{
+  color: #91b934;
+  font-family: "Metropolis_Medium";
+  font-size: 20px;
+}
+
+.actualapp h1 {
+  color: #07714c;
+  font-family: "Metropolis_ExtraBold";
+  text-align: center;
+  font-size:90px;
+}
+
+.actualapp p {
+  color: #07714c;
+  font-family: "Metropolis_Medium";
+  text-align: center;
+  font-size: 20px;
+  padding-left: 15%;
+  padding-right: 15%
+}
+
+.actualapp {
+  
+}
+
+.bot h1 {
+  color: #07714c;
+  font-family: "Metropolis_ExtraBold";
+  text-align: center;
+  font-size:90px;
+}
+
+.bot p {
+  color: #07714c;
+  font-family: "Metropolis_Medium";
+  text-align: center;
+  font-size: 20px;
+  padding-left: 15%;
+  padding-right: 15%
+}
+
+.bot a {
+  color: #7b4a0d;
+  font-family: "Metropolis_Medium";
+  font-size: 20px;
+}
+
+.bot a:hover{
+  color: #91b934;
+  font-family: "Metropolis_Medium";
+  font-size: 20px;
 }
 
 h1 {

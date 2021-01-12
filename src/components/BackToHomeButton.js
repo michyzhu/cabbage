@@ -7,9 +7,9 @@ function BackToHomeButton() {
     return (
         <>
         <Link to="/">
-            <Button className="back-to-home">
-                <p>click to go to go back to the homepage</p>
-            </Button>
+            <button className="back-to-home">
+                <p>back to home</p>
+            </button>
         </Link>
         </>
     )

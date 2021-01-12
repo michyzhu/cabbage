@@ -95,19 +95,25 @@ function ProducePage() {
 
     return (
         <>
-        <div class="body">
-            <h1>actual app!!!</h1>
-            <input type="file" onChange={onFileChange}/>
-            <label>click to upload image of your produce</label>
-            <br />
-            <p>warning: giving us your image gives permission to post it on twitter!!!</p>
-            <button onClick={onSubmit}>click to evaluate your produce</button>
-            <br/><br/>
-            {display !== "" && display}
-            <br/>
-            {result !== "" && <p> Our prediction is: {result} </p>}
-            <br/><br/>
-            <BackToHomeButton/>
+        <div className="body">
+            <div className="actualapp">
+                <h1>the app</h1>
+                <br/>
+                <p>
+                    upload an image of your produce. we'll identify the produce 
+                    type and tell you how rotten it is. warning: giving us your 
+                    image gives permission to post it on twitter!!!
+                </p>
+                <input type="file" onChange={onFileChange}/>
+                <label>click to upload image of your produce</label>
+                <br/><br/>
+                <button onClick={onSubmit}>click to evaluate your produce</button>
+                <br/><br/>
+                {display !== "" && display}
+                <br/>
+                {result !== "" && <p> Our prediction is: {result} </p>}
+                </div>
+                <BackToHomeButton/>
         </div>
         </>
     )

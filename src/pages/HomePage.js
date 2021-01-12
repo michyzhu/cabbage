@@ -5,8 +5,8 @@ import {Link} from "react-router-dom"
 function HomePage() {
     return (
         <>
-        <div class="body">
-            <div class="home">
+        <div className="body">
+            <div className="home">
                 <h1>how's your</h1>
                 <h1>produce?</h1>
                 <br/>
