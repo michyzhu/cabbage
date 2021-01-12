@@ -13,13 +13,13 @@ function ProducePage() {
         fetch(`/predict?modelName=${modelName}`).then(res => res.json()).then(data => {
             setDisplay(`model ${data.modelName} loaded`)
         })
-        // setModels({
-        //     "model": await tf.loadLayersModel('http://localhost:5000/public/models/model/model.json'),
-        //     "aboModel": await tf.loadLayersModel('http://localhost:5000/public/models/aboModel/model.json'),
-        //     "apple": await tf.loadLayersModel('http://localhost:5000/public/models/applesModel/model.json'),
-        //     "banana": await tf.loadLayersModel('http://localhost:5000/public/models/bananasModel/model.json'),
-        //     "orange": await tf.loadLayersModel('http://localhost:5000/public/models/orangesModel/model.json'),
-        // })
+        setModels({
+            "model": await tf.loadLayersModel('http://localhost:5000/public/models/model/model.json'),
+            "aboModel": await tf.loadLayersModel('http://localhost:5000/public/models/aboModel/model.json'),
+            "apple": await tf.loadLayersModel('http://localhost:5000/public/models/applesModel/model.json'),
+            "banana": await tf.loadLayersModel('http://localhost:5000/public/models/bananasModel/model.json'),
+            "orange": await tf.loadLayersModel('http://localhost:5000/public/models/orangesModel/model.json'),
+        })
     },[])
 
     const onFileChange = event => {
