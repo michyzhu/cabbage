@@ -10,12 +10,12 @@ function HomePage() {
                 <h1>how's your</h1>
                 <h1>produce?</h1>
                 <br/>
-                <p>we can tell you when your produce will go bad.</p>
+                <p>let us judge how ugly your produce is.</p>
                 <br/>
                 <Link to="/app">
-                    <Button className="main-button">
+                    <button class="main-button">
                         <p>try it</p>
-                    </Button>
+                    </button>
                 </Link>
                 <br/>
                 {/* <Link to="/about">

@@ -102,11 +102,19 @@ nav a:hover {
   color: #07714c;
 }
 
+.home {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
 .home h1 {
   color: #07714c;
   font-family: "Metropolis_ExtraBold";
   font-size: 130px;
-  line-height: 90%;
+  line-height: 100%;
   text-align: left;
   padding-left: 50px;
 }
@@ -114,26 +122,28 @@ nav a:hover {
 .home p {
   color: #07714c;
   font-family: "Metropolis_Medium";
-  font-size: 40px;
+  font-size: 35px;
   text-align: left;
   padding-left: 50px;
 }
 
 .main-button {
   background-color: #07714c;
-  padding: 5px 30px; 
-  /* text-align: center; */
-  display: left;
-  /* display: inline-block; */
-  /* margin: 4px 2px; */
+  padding: 0px 20px; 
+  border: none;
   border-radius: 12px;
+  float: left;
+  margin-left: 50px;
 }
 
 .main-button p {
   color: #a7c462;
-  font-family: "Metropolis_Medium";
+  font-family: "Metropolis_ExtraBold";
   padding-left: 0px;
+  padding-top: 10px;
   font-size:30px;
+  text-align: center;
+  margin: none;
 }
 
 h1 {
