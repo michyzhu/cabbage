@@ -1,0 +1,245 @@
+@font-face {
+  font-family: "Metropolis_Regular";
+  src: url(./fonts/metropolis-regular.otf);
+}
+
+@font-face {
+  font-family: "Metropolis_Medium";
+  src: url(./fonts/metropolis-medium.otf);
+}
+
+@font-face {
+  font-family: "Metropolis_ExtraBold";
+  src: url(./fonts/metropolis-extrabold.otf);
+}
+
+.App {
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+  background-color: #f0d3ae;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #f0d3ae;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #f0d3ae;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.body {
+  padding-top: 100px;
+  background-color: #f0d3ae;
+  height:100vh;
+}
+
+nav {
+  /* border-bottom: 4px solid black; */
+  text-align: right;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #f0d3ae;
+  padding:10px;
+}
+
+#logo {
+  float: left;
+  width:120px
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  display: inline-block;
+  padding-top: 16px;
+  color: #07714c;
+  font-family: "Metropolis_Regular";
+  /* padding-bottom: 16px; */
+}
+
+nav a {
+  text-decoration: none;
+  color: #07714c;
+  font-family: "Metropolis_Regular";
+  padding: 16px;
+}
+
+nav a:hover {
+  /* background: black; */
+  color: #91b934;
+}
+
+.back-to-home {
+  background-color: #07714c;
+  padding: 0px 15px; 
+  border: none;
+  border-radius: 12px;
+  float: center;
+}
+
+.back-to-home p {
+  color: #91b934;
+  font-family: "Metropolis_ExtraBold";
+  padding-top: 10px;
+  font-size:20px;
+  text-align: center;
+  margin: none;
+}
+
+.home {
+  position: absolute;
+  top: 25%;
+  padding-left: 5%;
+}
+
+.home h1 {
+  color: #07714c;
+  font-family: "Metropolis_ExtraBold";
+  font-size: 130px;
+  line-height: 100%;
+  /* text-align: left; */
+}
+
+.home p {
+  color: #07714c;
+  font-family: "Metropolis_Medium";
+  font-size: 35px;
+  text-align: left;
+  padding-left: 50px;
+}
+
+.main-button {
+  background-color: #07714c;
+  padding: 0px 20px; 
+  border: none;
+  border-radius: 12px;
+  float: left;
+  margin-left: 50px;
+}
+
+.main-button p {
+  color: #91b934;
+  font-family: "Metropolis_ExtraBold";
+  padding-left: 0px;
+  padding-top: 10px;
+  font-size:30px;
+  text-align: center;
+  margin: none;
+  line-height: 40px;
+}
+
+.about h1 {
+  color: #07714c;
+  font-family: "Metropolis_ExtraBold";
+  text-align: center;
+  font-size:90px;
+}
+
+.about p {
+  color: #07714c;
+  font-family: "Metropolis_Medium";
+  text-align: left;
+  font-size: 20px;
+  padding-left: 15%;
+  padding-right: 15%
+}
+
+.about a {
+  color: #7b4a0d;
+  font-family: "Metropolis_Medium";
+  font-size: 20px;
+}
+
+.about a:hover{
+  color: #91b934;
+  font-family: "Metropolis_Medium";
+  font-size: 20px;
+}
+
+.actualapp h1 {
+  color: #07714c;
+  font-family: "Metropolis_ExtraBold";
+  text-align: center;
+  font-size:90px;
+}
+
+.actualapp p {
+  color: #07714c;
+  font-family: "Metropolis_Medium";
+  text-align: center;
+  font-size: 20px;
+  padding-left: 15%;
+  padding-right: 15%
+}
+
+.actualapp {
+  
+}
+
+.bot h1 {
+  color: #07714c;
+  font-family: "Metropolis_ExtraBold";
+  text-align: center;
+  font-size:90px;
+}
+
+.bot p {
+  color: #07714c;
+  font-family: "Metropolis_Medium";
+  text-align: center;
+  font-size: 20px;
+  padding-left: 15%;
+  padding-right: 15%
+}
+
+.bot a {
+  color: #7b4a0d;
+  font-family: "Metropolis_Medium";
+  font-size: 20px;
+}
+
+.bot a:hover{
+  color: #91b934;
+  font-family: "Metropolis_Medium";
+  font-size: 20px;
+}
+
+h1 {
+  color: #07714c;
+  font-family: "Metropolis_ExtraBold";
+  text-align: left;
+  padding-left: 50px;
+}
