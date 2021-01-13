@@ -12,6 +12,19 @@ function ProducePage() {
         // nothing
     },[])
 
+    const loadImage = async profileImg => {
+        var myImage = new Image(100,100);
+        myImage.crossOrigin = "anonymous"
+        myImage.src = profileImg;
+        return new Promise((resolve, reject) => {
+            myImage.onload = () => {
+                resolve(myImage)
+                setDisplay(myImage)
+            };
+            myImage.onerror = reject;
+        });
+    }
+
     const onFileChange = event => {
         setFile(event.target.files[0])
     }
@@ -24,8 +37,8 @@ function ProducePage() {
         axios.post("http://localhost:5000/api/user-profile", formData, {
         }).then(async res => {
             const {profileImg} = res.data.userCreated
-            
-            setDisplay(<img src={profileImg} alt='image should show here'/>)
+            loadImage(profileImg)
+            //setDisplay(<img src={profileImg} alt='image should show here'/>)
             fetch(`/mask?imgPath=${profileImg}`).then(res => res.json()).then(data => {
                 console.log(data.predictions)
                 setResult(data.predictions)

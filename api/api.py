@@ -16,7 +16,6 @@ import tensorflow as tf
 #import skimage
 from skimage.measure import find_contours
 
-<<<<<<< HEAD
 
 from flask import Flask
 from flask import request
@@ -31,13 +30,6 @@ for model in {"aboModel.h5", "model.h5", "applesModel.h5", "bananasModel.h5", "o
     models[model] = load_model(model)
 
 
-=======
-from flask import Flask
-from flask import request
-app = Flask(__name__)
-
-models = {}
->>>>>>> c4da6eddc5c740c87dbd59e9acd0f87efd360778
 fruits = ["apple","banana","orange"]
 # for mrcnn
 CLASS_NAMES = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
@@ -55,11 +47,7 @@ CLASS_NAMES = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
                 'keyboard', 'cell phone', 'microwave', 'oven', 'toaster',
                 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors',
                 'teddy bear', 'hair drier', 'toothbrush']
-<<<<<<< HEAD
 bananaI, appleI, orangeI = CLASS_NAMES.index('banana'),CLASS_NAMES.index('apple'),CLASS_NAMES.index('orange')
-=======
-
->>>>>>> c4da6eddc5c740c87dbd59e9acd0f87efd360778
 
 @app.route('/time')
 def get_current_time():
@@ -70,7 +58,6 @@ def prediction():
     modelName = request.args.get("modelName")
     model = load_model("aboModel.h5")
 
-<<<<<<< HEAD
     imgPath = request.args.get("imgPath")
     print("IMAGEPATH:", imgPath)
     
@@ -80,10 +67,6 @@ def prediction():
         img = cv2.imdecode(img, cv2.IMREAD_COLOR)
 
     # img=cv2.imread(imgPath)
-=======
-    imgPath = "freshOrange.png"
-    img=cv2.imread(imgPath)
->>>>>>> c4da6eddc5c740c87dbd59e9acd0f87efd360778
     img=cv2.resize(img, (100,100))
     img=cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img = np.expand_dims(img, axis=0)
@@ -95,11 +78,8 @@ def prediction():
     max_prob = np.argmax(fruitPredictClasses)
     predictedFruit = fruits[max_prob]
 
-<<<<<<< HEAD
     #record['feature2'] = pymongo.binary.Binary( pickle.dumps( y, protocol=2) ) )
 
-=======
->>>>>>> c4da6eddc5c740c87dbd59e9acd0f87efd360778
     return {'modelName': predictedFruit}
 
 # MASK-RCNN STUFF
@@ -114,7 +94,6 @@ class SimpleConfig(Config):
     # number of classes on COCO dataset
     NUM_CLASSES = 81
 
-<<<<<<< HEAD
 
 def predict(img): # takes in a np image
     img=cv2.resize(img, (100,100))
@@ -146,8 +125,6 @@ def predict(img): # takes in a np image
     return finalPrediction
 
 
-=======
->>>>>>> c4da6eddc5c740c87dbd59e9acd0f87efd360778
 @app.route('/mask')
 def mask():
     config = SimpleConfig()
@@ -169,7 +146,6 @@ def mask():
     result = model.detect([image], verbose=1)
 
     r1 = result[0]
-<<<<<<< HEAD
     images = []
     predictions = []
     for i in range(r1['rois'].shape[0]):
@@ -201,37 +177,5 @@ def mask():
     
     print("made it past the for loop", predictions)
     return {"predictions": predictions[0]} #{"newImages":images}
-=======
-    bananaI, appleI, orangeI = CLASS_NAMES.index('banana'),CLASS_NAMES.index('apple'),CLASS_NAMES.index('orange')
-
-    print(result, r1)
-    images = []
-    for i in range(r1['rois'].shape[0]):
-        print("made it here at all ", i)
-        class_id = r1['class_ids'][i]
-        if(class_id == bananaI or class_id == orangeI or class_id == appleI):
-            y1, x1, y2, x2 = r1['rois'][i]
-            mask = r1['masks'][:, :, i]
-
-            '''padded_mask = np.zeros(
-                (mask.shape[0] + 2, mask.shape[1] + 2), dtype=np.uint8)
-            padded_mask[1:-1, 1:-1] = mask
-            contours = find_contours(padded_mask, 0.5)
-            for verts in contours:
-                # Subtract the padding and flip (y, x) to (x, y)
-                verts = np.fliplr(verts) - 1
-                p = skimage.draw.polygon2mask(masked_image.shape, verts)
-                maskImg(masked_image,mask,(255,255,0))
-            '''
-            blackMask = np.dstack([image[:,:,0]*mask,image[:,:,1]*mask,image[:,:,2]*mask]) 
-            invMask = np.logical_not(mask)
-            whiteBg = 255*np.dstack((invMask,invMask,invMask))
-            masked_image = (blackMask+whiteBg)[y1:y2,x1:x2,::-1]
-            #cv2.imwrite(f'{i}.jpg',masked_image.astype(np.uint8))
-            images.append(masked_image.astype(np.uint8))
-
-    print()
-    return {"newImages":images}
->>>>>>> c4da6eddc5c740c87dbd59e9acd0f87efd360778
 
     #visualize.display_instances(image, r1['rois'], r1['masks'],   r1['class_ids'], CLASS_NAMES, r1['scores'])
