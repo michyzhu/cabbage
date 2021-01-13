@@ -1,0 +1,42 @@
+@font-face {
+    font-family: "Metropolis_Regular";
+    src: url(../fonts/metropolis-regular.otf);
+  }
+  
+  @font-face {
+    font-family: "Metropolis_Medium";
+    src: url(../fonts/metropolis-medium.otf);
+  }
+  
+  @font-face {
+    font-family: "Metropolis_ExtraBold";
+    src: url(../fonts/metropolis-extrabold.otf);
+  }
+
+.about h1 {
+    color: #07714c;
+    font-family: "Metropolis_ExtraBold";
+    text-align: center;
+    font-size:90px;
+  }
+  
+  .about p {
+    color: #07714c;
+    font-family: "Metropolis_Medium";
+    text-align: left;
+    font-size: 20px;
+    padding-left: 15%;
+    padding-right: 15%
+  }
+  
+  .about a {
+    color: #064730;
+    font-family: "Metropolis_Medium";
+    font-size: 20px;
+  }
+  
+  .about a:hover{
+    color: #91b934;
+    font-family: "Metropolis_Medium";
+    font-size: 20px;
+  }

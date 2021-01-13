@@ -1,0 +1,50 @@
+@font-face {
+    font-family: "Metropolis_Regular";
+    src: url(../fonts/metropolis-regular.otf);
+}
+  
+@font-face {
+font-family: "Metropolis_Medium";
+src: url(../fonts/metropolis-medium.otf);
+}
+
+@font-face {
+font-family: "Metropolis_ExtraBold";
+src: url(../fonts/metropolis-extrabold.otf);
+}
+
+nav {
+    /* border-bottom: 4px solid black; */
+    text-align: right;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #f0d3ae;
+    padding:10px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+  
+nav li {
+display: inline-block;
+padding-top: 16px;
+color: #07714c;
+font-family: "Metropolis_Regular";
+/* padding-bottom: 16px; */
+}
+
+nav a {
+text-decoration: none;
+color: #07714c;
+font-family: "Metropolis_Regular";
+padding: 16px;
+}
+
+nav a:hover {
+/* background: black; */
+color: #91b934;
+}
