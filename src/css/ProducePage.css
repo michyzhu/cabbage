@@ -1,0 +1,47 @@
+@font-face {
+    font-family: "Metropolis_Regular";
+    src: url(../fonts/metropolis-regular.otf);
+  }
+  
+  @font-face {
+    font-family: "Metropolis_Medium";
+    src: url(../fonts/metropolis-medium.otf);
+  }
+  
+  @font-face {
+    font-family: "Metropolis_ExtraBold";
+    src: url(../fonts/metropolis-extrabold.otf);
+  }
+
+  .actualapp h1 {
+    color: #07714c;
+    font-family: "Metropolis_ExtraBold";
+    text-align: center;
+    font-size:90px;
+  }
+  
+  .actualapp p {
+    color: #07714c;
+    font-family: "Metropolis_Medium";
+    text-align: center;
+    font-size: 20px;
+    padding-left: 15%;
+    padding-right: 15%
+  }
+  
+  .actualapp hr {
+    border-color: #07714c;
+    padding: 20px, 0px;
+    width: 45%;
+  }
+  
+  .actualapp button {
+    background-color: #07714c;
+    color: #f0d3ae;
+    border: none;
+    padding: 5px 20px; 
+    border-radius: 40px;
+    font-family: "Metropolis_ExtraBold";
+    float: center;
+  }
+  

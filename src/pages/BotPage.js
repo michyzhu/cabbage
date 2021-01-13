@@ -1,6 +1,8 @@
+import "../css/BotPage.css"
 import React from 'react'
-import {Link} from "react-router-dom"
-import BackToHomeButton from '../components/BackToHomeButton'
+// import {Link} from "react-router-dom"
+//import BackToHomeButton from '../components/BackToHomeButton'
+import Footer from "../components/Footer"
 
 function AboutPage() {
     return (
@@ -15,10 +17,10 @@ function AboutPage() {
                 <br />
                 <p>
                     sarcastic filler text about our WONDERFUL TWITTER BOT 
-                    with a link to it <a href="http://google.com" target="_blank">right here</a>
+                    with a link to it <a href="http://google.com">right here</a>
                 </p>
             </div>
-            <BackToHomeButton/>
+            <Footer/>
         </div>
         </>
     )

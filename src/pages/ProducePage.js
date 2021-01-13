@@ -1,6 +1,8 @@
+import "../css/ProducePage.css"
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import BackToHomeButton from '../components/BackToHomeButton'
+// import BackToHomeButton from '../components/BackToHomeButton'
+import Footer from '../components/Footer'
 import * as tf from '@tensorflow/tfjs'
 
 function ProducePage() {
@@ -57,16 +59,17 @@ function ProducePage() {
                     type and tell you how rotten it is. warning: giving us your 
                     image gives permission to post it on twitter!!!
                 </p>
+                <hr></hr>
+                <label>upload your image:   </label> 
                 <input type="file" onChange={onFileChange}/>
-                <label>click to upload image of your produce</label>
                 <br/><br/>
                 <button onClick={onSubmit}>click to evaluate your produce</button>
                 <br/>
                 {result !== "" && <p> Our prediction is: {result} </p>}
                 <br/><br/>
                 {display !== "" && display}
-                </div>
-                <BackToHomeButton/>
+            </div>
+            <Footer/>
         </div>
         </>
     )

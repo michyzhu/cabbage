@@ -1,6 +1,8 @@
+import "../css/AboutPage.css"
 import React from 'react'
-import {Link} from "react-router-dom"
-import BackToHomeButton from '../components/BackToHomeButton'
+// import {Link} from "react-router-dom"
+// import BackToHomeButton from '../components/BackToHomeButton'
+import Footer from "../components/Footer"
 
 function AboutPage() {
     return (
@@ -23,11 +25,12 @@ function AboutPage() {
                 </p>
                 <br/>
                 <p>
-                    to see our github repository, <a href="http://google.com" target="_blank">click here</a>
+                    for more details, 
+                    feel free to visit our <a href="http://google.com">github repository</a>
                 </p>
             </div>
                 <p>contact form</p>
-                <BackToHomeButton/>
+                <Footer/>
         </div>
         </>
     )
