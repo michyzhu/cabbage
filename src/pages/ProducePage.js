@@ -13,13 +13,13 @@ function ProducePage() {
         fetch(`/predict?modelName=${modelName}`).then(res => res.json()).then(data => {
             setDisplay(`model ${data.modelName} loaded`)
         })
-        // setModels({
-        //     "model": await tf.loadLayersModel('http://localhost:5000/public/models/model/model.json'),
-        //     "aboModel": await tf.loadLayersModel('http://localhost:5000/public/models/aboModel/model.json'),
-        //     "apple": await tf.loadLayersModel('http://localhost:5000/public/models/applesModel/model.json'),
-        //     "banana": await tf.loadLayersModel('http://localhost:5000/public/models/bananasModel/model.json'),
-        //     "orange": await tf.loadLayersModel('http://localhost:5000/public/models/orangesModel/model.json'),
-        // })
+        setModels({
+            "model": await tf.loadLayersModel('http://localhost:5000/public/models/model/model.json'),
+            "aboModel": await tf.loadLayersModel('http://localhost:5000/public/models/aboModel/model.json'),
+            "apple": await tf.loadLayersModel('http://localhost:5000/public/models/applesModel/model.json'),
+            "banana": await tf.loadLayersModel('http://localhost:5000/public/models/bananasModel/model.json'),
+            "orange": await tf.loadLayersModel('http://localhost:5000/public/models/orangesModel/model.json'),
+        })
     },[])
 
     const onFileChange = event => {
@@ -83,10 +83,17 @@ function ProducePage() {
         }).then(async res => {
             const {profileImg} = res.data.userCreated
             
-            // fetch(`/mask?imgPath=${profileImg}`).then(res => res.json()).then(data => {
-            //     setDisplay(<img src={data.newImageUrls[0]} alt='image should show here'/>)
-            // })
-            setDisplay(<img src={profileImg} alt='image should show here'/>)
+            fetch(`/mask?imgPath=${profileImg}`).then(res => res.json()).then(data => {
+                // const croppedFD = new FormData()
+                // formData.append('croppedImg', data.newImages[0])
+
+                // axios.post("http://localhost:5000/api/user-profile",formData, {
+                // }).then(async res => {
+                //     const {croppedImg} = res.data.
+                // })
+                setDisplay(<img src={data.newImages[0]} alt='image should show here'/>)
+            })
+            //setDisplay(<img src={profileImg} alt='image should show here'/>)
 
             await loadImage(profileImg)
             .then(

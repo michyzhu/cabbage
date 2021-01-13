@@ -3,6 +3,8 @@ from mrcnn.config import Config
 from mrcnn import model as modellib
 from mrcnn import visualize
 import cv2
+import urllib
+import urllib.request
 import colorsys
 import argparse
 import imutils
@@ -74,17 +76,20 @@ class SimpleConfig(Config):
     # number of classes on COCO dataset
     NUM_CLASSES = 81
 
-@app.route('/mrcnn')
+@app.route('/mask')
 def mask():
     config = SimpleConfig()
     #config.display()
     model = modellib.MaskRCNN(mode="inference", config=config, model_dir=os.getcwd())
     model.load_weights("mask_rcnn_coco.h5", by_name=True)
 
-
     imagePath = request.args.get("imgPath")
-    #image = cv2.imread("cabb.jpg")
-    image = cv2.imread(imagePath)
+    
+    with urllib.request.urlopen(imagePath) as url:
+        s = url.read()
+        image = np.asarray(bytearray(s), dtype="uint8")
+        image = cv2.imdecode(image, cv2.IMREAD_COLOR)
+
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     image = imutils.resize(image, width=512)
     # perform a forward pass of the network to obtain the results
@@ -94,8 +99,10 @@ def mask():
     r1 = result[0]
     bananaI, appleI, orangeI = CLASS_NAMES.index('banana'),CLASS_NAMES.index('apple'),CLASS_NAMES.index('orange')
 
-    imgUrls = []
+    print(result, r1)
+    images = []
     for i in range(r1['rois'].shape[0]):
+        print("made it here at all ", i)
         class_id = r1['class_ids'][i]
         if(class_id == bananaI or class_id == orangeI or class_id == appleI):
             y1, x1, y2, x2 = r1['rois'][i]
@@ -115,9 +122,10 @@ def mask():
             invMask = np.logical_not(mask)
             whiteBg = 255*np.dstack((invMask,invMask,invMask))
             masked_image = (blackMask+whiteBg)[y1:y2,x1:x2,::-1]
-            cv2.imwrite(f'{i}.jpg',masked_image.astype(np.uint8))
-            imgUrls.append(f'{i}.jpg',masked_image.astype(np.uint8))
+            #cv2.imwrite(f'{i}.jpg',masked_image.astype(np.uint8))
+            images.append(masked_image.astype(np.uint8))
 
-    return {"newImageUrls":imgUrls}
+    print()
+    return {"newImages":images}
 
     #visualize.display_instances(image, r1['rois'], r1['masks'],   r1['class_ids'], CLASS_NAMES, r1['scores'])
