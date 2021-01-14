@@ -13,7 +13,12 @@
     src: url(../fonts/metropolis-extrabold.otf);
   }
 
+.about {
+  padding-bottom: 2.5rem;
+}
+
 .about h1 {
+    padding: none;
     color: #07714c;
     font-family: "Metropolis_ExtraBold";
     text-align: center;
@@ -32,6 +37,7 @@
   .about a {
     color: #064730;
     font-family: "Metropolis_Medium";
+    text-decoration: underline;
     font-size: 20px;
   }
   

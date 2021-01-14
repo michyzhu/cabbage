@@ -13,6 +13,10 @@
     src: url(../fonts/metropolis-extrabold.otf);
   }
 
+  .bot {
+    padding-bottom: 2.5rem; 
+  }
+
   .bot h1 {
     color: #07714c;
     font-family: "Metropolis_ExtraBold";
@@ -32,6 +36,7 @@
   .bot a {
     color: #064730;
     font-family: "Metropolis_Medium";
+    text-decoration: underline;
     font-size: 20px;
   }
   

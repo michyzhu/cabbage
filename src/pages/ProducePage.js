@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 // import BackToHomeButton from '../components/BackToHomeButton'
 import Footer from '../components/Footer'
+import Navbar from "../components/Navbar"
 import * as tf from '@tensorflow/tfjs'
 
 function ProducePage() {
@@ -13,19 +14,6 @@ function ProducePage() {
     useEffect(async () => {
         // nothing
     },[])
-
-    const loadImage = async profileImg => {
-        var myImage = new Image(100,100);
-        myImage.crossOrigin = "anonymous"
-        myImage.src = profileImg;
-        return new Promise((resolve, reject) => {
-            myImage.onload = () => {
-                resolve(myImage)
-                setDisplay(myImage)
-            };
-            myImage.onerror = reject;
-        });
-    }
 
     const onFileChange = event => {
         setFile(event.target.files[0])
@@ -39,8 +27,7 @@ function ProducePage() {
         axios.post("http://localhost:5000/api/user-profile", formData, {
         }).then(async res => {
             const {profileImg} = res.data.userCreated
-            loadImage(profileImg)
-            //setDisplay(<img src={profileImg} alt='image should show here'/>)
+            setDisplay(<img src={profileImg} alt='image should show here'/>)
             fetch(`/mask?imgPath=${profileImg}`).then(res => res.json()).then(data => {
                 console.log(data.predictions)
                 setResult(data.predictions)
@@ -51,19 +38,24 @@ function ProducePage() {
     return (
         <>
         <div className="body">
+        <Navbar />
             <div className="actualapp">
                 <h1>the app</h1>
                 <br/>
                 <p>
-                    upload an image of your produce. we'll identify the produce 
+                    upload an image (.jpg, .jpeg, .png) of your produce. we'll identify the produce 
                     type and tell you how rotten it is. warning: giving us your 
                     image gives permission to post it on twitter!!!
                 </p>
-                <hr></hr>
-                <label>upload your image:   </label> 
+                {/* <hr></hr> */}
+                {/* <label className="uploadfile">
+                    <p>uploadthefile</p>
+                </label> */}
+                <label className="hi">
                 <input type="file" onChange={onFileChange}/>
+                </label>
                 <br/><br/>
-                <button onClick={onSubmit}>click to evaluate your produce</button>
+                <button onClick={onSubmit}>evaluate</button>
                 <br/>
                 {result !== "" && <p> Our prediction is: {result} </p>}
                 <br/><br/>

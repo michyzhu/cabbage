@@ -3,11 +3,14 @@ import React from 'react'
 // import {Link} from "react-router-dom"
 // import BackToHomeButton from '../components/BackToHomeButton'
 import Footer from "../components/Footer"
+import Navbar from "../components/Navbar"
+
 
 function AboutPage() {
     return (
         <>
         <div className="body">
+            <Navbar/>
             <div className="about">
                 <h1>about the project</h1>
                 <br/>
@@ -26,11 +29,10 @@ function AboutPage() {
                 <br/>
                 <p>
                     for more details, 
-                    feel free to visit our <a href="http://google.com">github repository</a>
+                    feel free to visit our <a href="http://google.com" target="_blank">github repository</a>
                 </p>
             </div>
-                <p>contact form</p>
-                <Footer/>
+            <Footer/>
         </div>
         </>
     )
