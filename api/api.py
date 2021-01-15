@@ -110,7 +110,6 @@ def predict(img): # takes in a np image
     max_prob = np.argmax(fruitPredictClasses)
     predictedFruitOfAll = allFruits[max_prob]
 
-
     # abo predict
     threeFruitClasses = models["aboModel.h5"].predict(img, batch_size=10)
     max_prob = np.argmax(threeFruitClasses)
