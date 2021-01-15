@@ -64,7 +64,7 @@
 
 #logo {
   float: left;
-  width:120px
+  width:120px;
 }
 
 .back-to-home {
@@ -125,7 +125,7 @@
   line-height: 40px;
 }
 
-.footer p {
+.footer {
   /* padding-bottom: 10%; */
   color: #064730;
   font-family: "Metropolis_Regular";

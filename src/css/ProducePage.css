@@ -18,6 +18,8 @@
   }
 
   .actualapp h1 {
+    padding-left: 10%;
+    padding-right: 10%;
     color: #07714c;
     font-family: "Metropolis_ExtraBold";
     text-align: center;
@@ -54,4 +56,16 @@
     padding-left: 111px;
   }
 
+  .hide {
+    display: none;
+  }
+
+  .show {
+    display: block;
+  }
+
+  .actualapp img {
+    width: 40%;
+    padding-bottom: 5%;
+  }
   
