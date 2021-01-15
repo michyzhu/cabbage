@@ -3,11 +3,9 @@ import {Link} from "react-router-dom"
 
 function Footer() {
     return (
-        <div className="footer">
         <Link to="/">
-            <p>back to home</p>
+            <p className="footer">back to home</p>
         </Link>
-        </div>
     )
 }
 

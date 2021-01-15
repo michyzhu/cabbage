@@ -35,6 +35,21 @@ function ProducePage() {
         })
     }
 
+    const toggleText = () => {
+        var text = document.getElementById("demo");
+        if (text.style.display === "none") {
+          text.style.display = "block";
+        } else {
+          text.style.display = "none";
+        }
+      }
+
+    const onButtonClick = () => {
+        document.getElementById('loading').className="show"
+    }  
+
+    
+
     return (
         <>
         <div className="body">
@@ -57,9 +72,15 @@ function ProducePage() {
                 <br/><br/>
                 <button onClick={onSubmit}>evaluate</button>
                 <br/><br/>
-                {result !== "" && <p> Our prediction is: {result} </p>}
+                {result === "" && display !== "" && <p> loading prediction... </p>}
+                {result !== "" && <p> 
+                    prediction: your {result["predictedFruitOfAll"]} is {result["predictedFreshness"]}  
+                </p>}
+                {/* {result !== "" && <p> prediction: {result} </p>} */}
                 <br/>
-                {display !== "" && display}
+                <div className="imagegoeshere">
+                    {display !== "" && display}
+                </div>
             </div>
             <Footer/>
         </div>

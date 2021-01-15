@@ -120,9 +120,15 @@ def predict(img): # takes in a np image
     freshPredictClasses = freshModel.predict(img, batch_size=10)
     predictedFreshness = 'rotten' if freshPredictClasses[0][0] > 0.5 else 'fresh'
   
-    finalPrediction = f'all: {predictedFruitOfAll}, three: {predictedFruitOfThree}, fresh: {predictedFreshness}'
-    return finalPrediction
+    # finalPrediction = f'all: {predictedFruitOfAll}, three: {predictedFruitOfThree}, fresh: {predictedFreshness}'
+    # return finalPrediction
 
+    finalPredictions = {
+        "predictedFruitOfAll": predictedFruitOfAll,
+        "predictedFruitOfThree": predictedFruitOfThree,
+        "predictedFreshness": predictedFreshness
+    }
+    return finalPredictions
 
 @app.route('/mask')
 def mask():

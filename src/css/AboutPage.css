@@ -18,7 +18,8 @@
 }
 
 .about h1 {
-    padding: none;
+    padding-left: 10%;
+    padding-right: 10%;
     color: #07714c;
     font-family: "Metropolis_ExtraBold";
     text-align: center;
