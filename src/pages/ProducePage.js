@@ -24,7 +24,7 @@ function ProducePage() {
         const formData = new FormData()
         formData.append('profileImg', file)
         
-        axios.post("http://localhost:5000/api/user-profile", formData, {
+        axios.post("https://rottenfresh.herokuapp.com/api/user-profile", formData, {
         }).then(async res => {
             const {profileImg} = res.data.userCreated
             setDisplay(<img src={profileImg} alt='image should show here'/>)
