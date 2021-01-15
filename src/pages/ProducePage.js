@@ -56,9 +56,9 @@ function ProducePage() {
                 </label>
                 <br/><br/>
                 <button onClick={onSubmit}>evaluate</button>
-                <br/>
-                {result !== "" && <p> Our prediction is: {result} </p>}
                 <br/><br/>
+                {result !== "" && <p> Our prediction is: {result} </p>}
+                <br/>
                 {display !== "" && display}
             </div>
             <Footer/>
