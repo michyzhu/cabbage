@@ -58,7 +58,8 @@
 .body {
   padding-top: 100px;
   background-color: #f0d3ae;
-  height:100vh;
+  position: relative;
+  min-height: 100vh;
 }
 
 #logo {
@@ -86,8 +87,8 @@
 
 .home {
   position: absolute;
-  top: 25%;
-  padding-left: 5%;
+  padding-top: 6%;
+  padding-left: 10%;
 }
 
 .home h1 {
@@ -95,7 +96,6 @@
   font-family: "Metropolis_ExtraBold";
   font-size: 130px;
   line-height: 100%;
-  /* text-align: left; */
 }
 
 .home p {
@@ -103,7 +103,6 @@
   font-family: "Metropolis_Medium";
   font-size: 35px;
   text-align: left;
-  padding-left: 50px;
 }
 
 .main-button {
@@ -112,7 +111,7 @@
   border: none;
   border-radius: 40px;
   float: left;
-  margin-left: 50px;
+  margin-top: 10px;
 }
 
 .main-button p {
@@ -127,16 +126,19 @@
 }
 
 .footer p {
-  position: center;
   /* padding-bottom: 10%; */
   color: #064730;
   font-family: "Metropolis_Regular";
   text-decoration: underline;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
 }
 
 h1 {
   color: #07714c;
   font-family: "Metropolis_ExtraBold";
   text-align: left;
-  padding-left: 50px;
+  /* padding-left: 50px; */
 }

@@ -3,11 +3,13 @@ import React from 'react'
 // import {Link} from "react-router-dom"
 //import BackToHomeButton from '../components/BackToHomeButton'
 import Footer from "../components/Footer"
+import Navbar from "../components/Navbar"
 
 function AboutPage() {
     return (
         <>
         <div className="body">
+            <Navbar/>
             <div className="bot">
                 <h1>say hi to our bot</h1>
                 <br/>
@@ -17,7 +19,7 @@ function AboutPage() {
                 <br />
                 <p>
                     sarcastic filler text about our WONDERFUL TWITTER BOT 
-                    with a link to it <a href="http://google.com">right here</a>
+                    with a link to it <a href="http://google.com" target="_blank">right here</a>
                 </p>
             </div>
             <Footer/>
