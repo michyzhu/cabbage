@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function Navbar() {
     return(
         <nav>
-            <img src="https://rottenfresh.herokuapp.com/public/frontEndImages/logo.png" alt="peach" id="logo"/>
+            {/* <img src="https://rottenfresh.herokuapp.com/public/frontEndImages/logo.png" alt="peach" id="logo"/> */}
             <ul>
                 <li>
                     <Link to="/">home</Link>

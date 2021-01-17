@@ -16,42 +16,36 @@ import tensorflow as tf
 #import skimage
 from skimage.measure import find_contours
 
-
-from flask import Flask
-from flask import request
+from flask import Flask, request, url_for
 from flask_pymongo import PyMongo
-app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb+srv://cabbageDb:peachDb@cluster0.b6n76.mongodb.net/<dbname>?retryWrites=true&w=majority"#mongodb://localhost:27017/myDatabase"
+from flask_cors import CORS, cross_origin
+
+
+app = Flask(__name__, static_folder='../build')
+app.config["MONGO_URI"] = "mongodb+srv://cabbageDb:peachDb@cluster0.b6n76.mongodb.net/images?retryWrites=true&w=majority"#mongodb://localhost:27017/myDatabase"
+app.config['CORS_HEADERS'] = 'Content-Type'
+CORS(app)
 mongo = PyMongo(app)
 
+if __name__ == "__main__":
+    app.run(debug=True,port=5000)
+    #app.run(debug=True,port=process.env.PORT)
 
-models = {}
-for model in {"mobile36.h5","aboModel.h5", "model.h5", "applesModel.h5", "bananasModel.h5", "orangesModel.h5"}:
-    models[model] = load_model(model)
-
-
-fruits = ["apple","banana","orange"]
-# for mrcnn
-CLASS_NAMES = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
-                'bus', 'train', 'truck', 'boat', 'traffic light',
-                'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird',
-                'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear',
-                'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie',
-                'suitcase', 'frisbee', 'skis', 'snowboard', 'sports ball',
-                'kite', 'baseball bat', 'baseball glove', 'skateboard',
-                'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup',
-                'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple',
-                'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza',
-                'donut', 'cake', 'chair', 'couch', 'potted plant', 'bed',
-                'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote',
-                'keyboard', 'cell phone', 'microwave', 'oven', 'toaster',
-                'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors',
-                'teddy bear', 'hair drier', 'toothbrush']
-bananaI, appleI, orangeI = CLASS_NAMES.index('banana'),CLASS_NAMES.index('apple'),CLASS_NAMES.index('orange')
-
-@app.route('/time')
-def get_current_time():
-    return {'time': time.time()}
+@app.route('/upload', methods=['POST'])
+@cross_origin()
+def fileUpload():
+    if 'file' in request.files:
+        imgFile = request.files['file'] 
+        filename = request.form['filename']
+        mongo.save_file(filename,imgFile)
+        mongo.db.users.insert({"fileURL":filename})
+    url = url_for('file',filename=filename)
+    response = {"url":url}
+    return response
+    
+@app.route('/file/<filename>')
+def file(filename):
+    return mongo.send_file(filename)
 
 @app.route('/predict')
 def prediction():
@@ -83,6 +77,30 @@ def prediction():
     return {'modelName': predictedFruit}
 
 # MASK-RCNN STUFF
+
+
+models = {}
+for model in {"mobile36.h5","aboModel.h5", "model.h5", "applesModel.h5", "bananasModel.h5", "orangesModel.h5"}:
+    models[model] = load_model(model)
+
+fruits = ["apple","banana","orange"]
+# for mrcnn
+CLASS_NAMES = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
+                'bus', 'train', 'truck', 'boat', 'traffic light',
+                'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird',
+                'cat', 'dog', 'horse', 'sheep', 'cow', 'elephant', 'bear',
+                'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie',
+                'suitcase', 'frisbee', 'skis', 'snowboard', 'sports ball',
+                'kite', 'baseball bat', 'baseball glove', 'skateboard',
+                'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup',
+                'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple',
+                'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza',
+                'donut', 'cake', 'chair', 'couch', 'potted plant', 'bed',
+                'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote',
+                'keyboard', 'cell phone', 'microwave', 'oven', 'toaster',
+                'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors',
+                'teddy bear', 'hair drier', 'toothbrush']
+bananaI, appleI, orangeI = CLASS_NAMES.index('banana'),CLASS_NAMES.index('apple'),CLASS_NAMES.index('orange')
 
 class SimpleConfig(Config):
     # give the configuration a recognizable name
@@ -184,3 +202,10 @@ def mask():
     return {"predictions": predictions[0]} #{"newImages":images}
 
     #visualize.display_instances(image, r1['rois'], r1['masks'],   r1['class_ids'], CLASS_NAMES, r1['scores'])
+
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def index(path):
+  '''Return index.html for all non-api routes'''
+  return send_from_directory(app.static_folder, 'index.html')
