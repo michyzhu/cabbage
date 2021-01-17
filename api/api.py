@@ -20,7 +20,7 @@ from flask_pymongo import PyMongo
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__, static_folder='../build')
-app.config["MONGO_URI"] = "mongodb+srv://cabbageDb:peachDb@cluster0.b6n76.mongodb.net/images?retryWrites=true&w=majority"#mongodb://localhost:27017/myDatabase"
+app.config["MONGO_URI"] = "mongodb+srv://cabbageDb:peachDb@cluster0.b6n76.mongodb.net/images?retryWrites=true&w=majority&ssl=true&ssl_cert_reqs=CERT_NONE"#mongodb://localhost:27017/myDatabase"
 app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app)
 mongo = PyMongo(app)
@@ -75,8 +75,8 @@ def prediction():
 
 # MASK-RCNN STUFF
 models = {}
-for model in {"mobile36.h5","aboModel.h5", "model.h5", "applesModel.h5", "bananasModel.h5", "orangesModel.h5"}:
-    models[model] = load_model(model)
+# for model in {"mobile36.h5","aboModel.h5", "model.h5", "applesModel.h5", "bananasModel.h5", "orangesModel.h5"}:
+#     models[model] = load_model(model)
 
 fruits = ["apple","banana","orange"]
 # for mrcnn
