@@ -43,7 +43,12 @@ function ProducePage() {
             }).then((response) => response.json()).then(response => {
                 console.log(response.url)
                 setDisplay(<img src={response.url} alt='image should show here'/>)
-        });
+            }).then(() => {
+                fetch(`/predict?imgPath=${filename}`).then(res => res.json()).then(data => {
+                    console.log(data.predictions)
+                    setResult(data.predictions)
+                })
+            }
 
         // axios.post("https://rottenfresh.herokuapp.com/api/user-profile", formData, {
         // }).then(async res => {
