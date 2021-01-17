@@ -16,13 +16,13 @@ import tensorflow as tf
 #import skimage
 from skimage.measure import find_contours
 
-from flask import Flask, request, url_for
+from flask import Flask, request, url_for, send_from_directory
 from flask_pymongo import PyMongo
 from flask_cors import CORS, cross_origin
 
 
 app = Flask(__name__, static_folder='../build')
-app.config["MONGO_URI"] = "mongodb+srv://cabbageDb:peachDb@cluster0.b6n76.mongodb.net/images?retryWrites=true&w=majority"#mongodb://localhost:27017/myDatabase"
+app.config["MONGO_URI"] = "mongodb+srv://cabbageDb:peachDb@cluster0.b6n76.mongodb.net/images?retryWrites=true&w=majority&ssl=true&ssl_cert_reqs=CERT_NONE"#mongodb://localhost:27017/myDatabase"
 app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app)
 mongo = PyMongo(app)
@@ -40,6 +40,7 @@ def fileUpload():
         mongo.save_file(filename,imgFile)
         mongo.db.users.insert({"fileURL":filename})
     url = url_for('file',filename=filename)
+    # url = url_for('file', filename="7b0bccab-e341-4e40-ad99-f7b18e1d0f8f-37_100.jpg")
     response = {"url":url}
     return response
     
@@ -80,8 +81,8 @@ def prediction():
 
 
 models = {}
-for model in {"mobile36.h5","aboModel.h5", "model.h5", "applesModel.h5", "bananasModel.h5", "orangesModel.h5"}:
-    models[model] = load_model(model)
+# for model in {"mobile36.h5","aboModel.h5", "model.h5", "applesModel.h5", "bananasModel.h5", "orangesModel.h5"}:
+#     models[model] = load_model(model)
 
 fruits = ["apple","banana","orange"]
 # for mrcnn
