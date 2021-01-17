@@ -34,13 +34,13 @@ if __name__ == "__main__":
 @app.route('/upload', methods=['POST'])
 @cross_origin()
 def fileUpload():
-    if 'file' in request.files:
-        imgFile = request.files['file'] 
-        filename = request.form['filename']
-        mongo.save_file(filename,imgFile)
-        mongo.db.users.insert({"fileURL":filename})
-    url = url_for('file',filename=filename)
-    # url = url_for('file', filename="7b0bccab-e341-4e40-ad99-f7b18e1d0f8f-37_100.jpg")
+    # if 'file' in request.files:
+    #     imgFile = request.files['file'] 
+    #     filename = request.form['filename']
+    #     mongo.save_file(filename,imgFile)
+    #     mongo.db.users.insert({"fileURL":filename})
+    # url = url_for('file',filename=filename)
+    url = url_for('file', filename="7b0bccab-e341-4e40-ad99-f7b18e1d0f8f-37_100.jpg")
     response = {"url":url}
     return response
     
