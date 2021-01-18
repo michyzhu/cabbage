@@ -38,6 +38,7 @@ def fileUpload():
         mongo.save_file(filename,imgFile)
         mongo.db.users.insert({"fileURL":filename})
     url = url_for('file',filename=filename)
+    # url = url_for('file', filename="7b0bccab-e341-4e40-ad99-f7b18e1d0f8f-37_100.jpg")
     response = {"url":url}
     return response
     
