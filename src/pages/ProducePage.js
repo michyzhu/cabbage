@@ -39,7 +39,7 @@ function ProducePage() {
         formData.append('file', file)
         formData.append('filename', filename)
 
-        fetch('http://localhost:5000/upload', {
+        fetch('https://rottenfresh.herokuapp.com/upload', {
             method: 'POST',
             body: formData,
         }).then((response) => response.json()).then(response => {
