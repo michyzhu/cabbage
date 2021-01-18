@@ -20,7 +20,7 @@ from flask_pymongo import PyMongo
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__, static_folder='../build')
-app.config["MONGO_URI"] = "mongodb+srv://cabbageDb:peachDb@cluster0.b6n76.mongodb.net/images?retryWrites=true&w=majority&ssl=true&ssl_cert_reqs=CERT_NONE"#mongodb://localhost:27017/myDatabase"
+app.config["MONGO_URI"] = "mongodb+srv://cabbageDb:peachDb@cluster0.b6n76.mongodb.net/images?retryWrites=true&w=majority&ssl=true&ssl_cert_reqs=CERT_NONE"
 app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app)
 mongo = PyMongo(app)
@@ -34,7 +34,6 @@ if __name__ == "__main__":
 def fileUpload():
     if 'file' in request.files:
         imgFile = request.files['file'] 
-        print(type(imgFile))
         filename = request.form['filename']
         mongo.save_file(filename,imgFile)
         mongo.db.users.insert({"fileURL":filename})
@@ -42,43 +41,23 @@ def fileUpload():
     response = {"url":url}
     return response
     
-# @app.route('/file/<filename>')
-# def file(filename):
-#     return mongo.send_file(filename)
-
-@app.route('/predict')
-def prediction():
-    modelName = request.args.get("modelName")
-    model = load_model("aboModel.h5")
-
-    imgPath = request.args.get("imgPath")
-    print("IMAGEPATH:", imgPath)
-    
-    with urllib.request.urlopen(imgPath) as url:
-        s = url.read()
-        img = np.asarray(bytearray(s), dtype="uint8")
-        img = cv2.imdecode(img, cv2.IMREAD_COLOR)
-
-    # img=cv2.imread(imgPath)
-    img=cv2.resize(img, (100,100))
-    img=cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    img = np.expand_dims(img, axis=0)
-
-    img = np.vstack([img])/255.0
-
-    # normal predict
-    fruitPredictClasses = model.predict(img, batch_size=10)
-    max_prob = np.argmax(fruitPredictClasses)
-    predictedFruit = fruits[max_prob]
-
-    return {'modelName': predictedFruit}
+@app.route('/file/<filename>')
+def file(filename):
+    return mongo.send_file(filename)
 
 # MASK-RCNN STUFF
 models = {}
-# for model in {"mobile36.h5","aboModel.h5", "model.h5", "applesModel.h5", "bananasModel.h5", "orangesModel.h5"}:
-#     models[model] = load_model(model)
+for mod in {"mobile36.h5","aboModel.h5", "model.h5", "applesModel.h5", "bananasModel.h5", "orangesModel.h5"}:
+    models[mod] = load_model(mod)
 
 fruits = ["apple","banana","orange"]
+
+# List of all fruits
+fruits36 = ['apple', 'banana', 'beetroot', 'bell pepper', 'cabbage', 'capsicum', 'carrot', 'cauliflower', 'chilli pepper', 'corn', 'cucumber', 'eggplant', 'garlic', 'ginger', 'grapes', 'jalepeno', 'kiwi', 'lemon', 'lettuce', 'mango', 'onion', 'orange', 'paprika', 'pear', 'peas', 'pineapple', 'pomegranate', 'potato', 'raddish', 'soy beans', 'spinach', 'sweetcorn', 'sweetpotato', 'tomato', 'turnip', 'watermelon']
+
+allFruits = ['Apple Braeburn', 'Apple Crimson Snow', 'Apple Golden 1', 'Apple Golden 2', 'Apple Golden 3', 'Apple Granny Smith', 'Apple Pink Lady', 'Apple Red 1', 'Apple Red 2', 'Apple Red 3', 'Apple Red Delicious', 'Apple Red Yellow 1', 'Apple Red Yellow 2', 'Apricot', 'Avocado', 'Avocado ripe', 'Banana', 'Banana Lady Finger', 'Banana Red', 'Beetroot', 'Blueberry', 'Cactus fruit', 'Cantaloupe 1', 'Cantaloupe 2', 'Carambula', 'Cauliflower', 'Cherry 1', 'Cherry 2', 'Cherry Rainier', 'Cherry Wax Black', 'Cherry Wax Red', 'Cherry Wax Yellow', 'Chestnut', 'Clementine', 'Cocos', 'Corn', 'Corn Husk', 'Cucumber Ripe', 'Cucumber Ripe 2', 'Dates', 'Eggplant', 'Fig', 'Ginger Root', 'Granadilla', 'Grape Blue', 'Grape Pink', 'Grape White', 'Grape White 2', 'Grape White 3', 'Grape White 4', 'Grapefruit Pink', 'Grapefruit White', 'Guava', 'Hazelnut', 'Huckleberry', 'Kaki', 'Kiwi', 'Kohlrabi', 'Kumquats', 'Lemon', 'Lemon Meyer', 'Limes', 'Lychee', 'Mandarine', 'Mango', 'Mango Red', 'Mangostan', 'Maracuja', 'Melon Piel de Sapo', 'Mulberry', 'Nectarine', 'Nectarine Flat', 'Nut Forest', 'Nut Pecan', 'Onion Red', 'Onion Red Peeled', 'Onion White', 'Orange', 'Papaya', 'Passion Fruit', 'Peach', 'Peach 2', 'Peach Flat', 'Pear', 'Pear 2', 'Pear Abate', 'Pear Forelle', 'Pear Kaiser', 'Pear Monster', 'Pear Red', 'Pear Stone', 'Pear Williams', 'Pepino', 'Pepper Green', 'Pepper Orange', 'Pepper Red', 'Pepper Yellow', 'Physalis', 'Physalis with Husk', 'Pineapple', 'Pineapple Mini', 'Pitahaya Red', 'Plum', 'Plum 2', 'Plum 3', 'Pomegranate', 'Pomelo Sweetie', 'Potato Red', 'Potato Red Washed', 'Potato Sweet', 'Potato White', 'Quince', 'Rambutan', 'Raspberry', 'Redcurrant', 'Salak', 'Strawberry', 'Strawberry Wedge', 'Tamarillo', 'Tangelo', 'Tomato 1', 'Tomato 2', 'Tomato 3', 'Tomato 4', 'Tomato Cherry Red', 'Tomato Heart', 'Tomato Maroon', 'Tomato Yellow', 'Tomato not Ripened', 'Walnut', 'Watermelon']
+threeFruits = ["applesModel.h5","bananasModel.h5","orangesModel.h5"]
+
 # for mrcnn
 CLASS_NAMES = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
                 'bus', 'train', 'truck', 'boat', 'traffic light',
@@ -105,16 +84,18 @@ class SimpleConfig(Config):
     IMAGES_PER_GPU = 1
     # number of classes on COCO dataset
     NUM_CLASSES = 81
+config = SimpleConfig()
+#config.display()
+model = modellib.MaskRCNN(mode="inference", config=config, model_dir=os.getcwd())
+model.load_weights("mask_rcnn_coco.h5", by_name=True)
 
 @app.route('/predict')
+@cross_origin()
 def mask():
-    config = SimpleConfig()
-    #config.display()
-    model = modellib.MaskRCNN(mode="inference", config=config, model_dir=os.getcwd())
-    model.load_weights("mask_rcnn_coco.h5", by_name=True)
-
     filename = request.args.get("imgPath")
-    imagePath = url_for('file',filename=filename)
+    print(filename)
+    #imagePath = " + filename
+    imagePath = "http://localhost:5000/" + url_for('file',filename=filename)
     
     with urllib.request.urlopen(imagePath) as url:
         s = url.read()
@@ -127,7 +108,6 @@ def mask():
     #print("[INFO] making predictions with Mask R-CNN...")
     result = model.detect([image], verbose=1)
     r1 = result[0]
-    images = []
     predictions = []
     for i in range(r1['rois'].shape[0]):
         class_id = r1['class_ids'][i]
@@ -140,47 +120,34 @@ def mask():
         #cv2.imwrite(f'{i}.jpg',masked_image.astype(np.uint8))
         
         newFilename = f'{imagePath}-masked'
-        #print(filename)
-        #mongo.save_file(filename, masked_image)
-        #images.append(masked_image.astype(np.uint8))
-        images.append(masked_image)
-        prediction = predict(masked_image)
+        # mongo.save_file(newFilename, cropped_image)
+        # mongo.save_file(filename,imgFile)
+        # mongo.db.users.insert({"fileURL":filename})
+        # url = url_for('file',filename=filename)
+        
+        prediction = predict(cropped_image)
         print("prediction number ", i, ": ", prediction)
         predictions.append(prediction)
-
 
     if(len(predictions) == 0):
         prediction = predict(image)
         print("couldn't find anything, the prediction is ", prediction)
         predictions.append(prediction)
-    
-    print("made it past the for loop", predictions)
-    return {"predictions": predictions} #{"newImages":images}
+
+    return {"predictions": predictions}
 
     #visualize.display_instances(image, r1['rois'], r1['masks'],   r1['class_ids'], CLASS_NAMES, r1['scores'])
 
-def getMask(r1,image):
-    mask = r1['masks'][:, :, i]
-    blackMask = np.dstack([image[:,:,0]*mask,image[:,:,1]*mask,image[:,:,2]*mask]) 
-    invMask = np.logical_not(mask)
-    whiteBg = 255*np.dstack((invMask,invMask,invMask))
-    masked_image = (blackMask+whiteBg)
-    return masked_image.astype(np.uint8)
-
 def predict(img): # takes in a np image
-    img=cv2.resize(img, (100,100))
+    img = cv2.resize(img, (100,100))
     img = np.expand_dims(img, axis=0)
-
     img = np.vstack([img])/255.0
 
-    # List of all fruits
-    allFruits = ['Apple Braeburn', 'Apple Crimson Snow', 'Apple Golden 1', 'Apple Golden 2', 'Apple Golden 3', 'Apple Granny Smith', 'Apple Pink Lady', 'Apple Red 1', 'Apple Red 2', 'Apple Red 3', 'Apple Red Delicious', 'Apple Red Yellow 1', 'Apple Red Yellow 2', 'Apricot', 'Avocado', 'Avocado ripe', 'Banana', 'Banana Lady Finger', 'Banana Red', 'Beetroot', 'Blueberry', 'Cactus fruit', 'Cantaloupe 1', 'Cantaloupe 2', 'Carambula', 'Cauliflower', 'Cherry 1', 'Cherry 2', 'Cherry Rainier', 'Cherry Wax Black', 'Cherry Wax Red', 'Cherry Wax Yellow', 'Chestnut', 'Clementine', 'Cocos', 'Corn', 'Corn Husk', 'Cucumber Ripe', 'Cucumber Ripe 2', 'Dates', 'Eggplant', 'Fig', 'Ginger Root', 'Granadilla', 'Grape Blue', 'Grape Pink', 'Grape White', 'Grape White 2', 'Grape White 3', 'Grape White 4', 'Grapefruit Pink', 'Grapefruit White', 'Guava', 'Hazelnut', 'Huckleberry', 'Kaki', 'Kiwi', 'Kohlrabi', 'Kumquats', 'Lemon', 'Lemon Meyer', 'Limes', 'Lychee', 'Mandarine', 'Mango', 'Mango Red', 'Mangostan', 'Maracuja', 'Melon Piel de Sapo', 'Mulberry', 'Nectarine', 'Nectarine Flat', 'Nut Forest', 'Nut Pecan', 'Onion Red', 'Onion Red Peeled', 'Onion White', 'Orange', 'Papaya', 'Passion Fruit', 'Peach', 'Peach 2', 'Peach Flat', 'Pear', 'Pear 2', 'Pear Abate', 'Pear Forelle', 'Pear Kaiser', 'Pear Monster', 'Pear Red', 'Pear Stone', 'Pear Williams', 'Pepino', 'Pepper Green', 'Pepper Orange', 'Pepper Red', 'Pepper Yellow', 'Physalis', 'Physalis with Husk', 'Pineapple', 'Pineapple Mini', 'Pitahaya Red', 'Plum', 'Plum 2', 'Plum 3', 'Pomegranate', 'Pomelo Sweetie', 'Potato Red', 'Potato Red Washed', 'Potato Sweet', 'Potato White', 'Quince', 'Rambutan', 'Raspberry', 'Redcurrant', 'Salak', 'Strawberry', 'Strawberry Wedge', 'Tamarillo', 'Tangelo', 'Tomato 1', 'Tomato 2', 'Tomato 3', 'Tomato 4', 'Tomato Cherry Red', 'Tomato Heart', 'Tomato Maroon', 'Tomato Yellow', 'Tomato not Ripened', 'Walnut', 'Watermelon']
-    threeFruits = ["applesModel.h5","bananasModel.h5","orangesModel.h5"]
-
     # normal predict
-    fruitPredictClasses = models["model.h5"].predict(img, batch_size=10)
+    fruitPredictClasses = models["mobile36.h5"].predict(img, batch_size=10)
+    #print(len(fruitPredictClasses[0]),"MOBILE", fruitPredictClasses, "-00------------------------------------------")
     max_prob = np.argmax(fruitPredictClasses)
-    predictedFruitOfAll = allFruits[max_prob]
+    predictedFruitOfAll = fruits36[max_prob]
 
     # abo predict
     threeFruitClasses = models["aboModel.h5"].predict(img, batch_size=10)
@@ -192,9 +159,6 @@ def predict(img): # takes in a np image
     freshPredictClasses = freshModel.predict(img, batch_size=10)
     predictedFreshness = 'rotten' if freshPredictClasses[0][0] > 0.5 else 'fresh'
   
-    # finalPrediction = f'all: {predictedFruitOfAll}, three: {predictedFruitOfThree}, fresh: {predictedFreshness}'
-    # return finalPrediction
-
     finalPredictions = {
         "predictedFruitOfAll": predictedFruitOfAll,
         "predictedFruitOfThree": predictedFruitOfThree,
@@ -202,6 +166,14 @@ def predict(img): # takes in a np image
     }
     return finalPredictions
 
+
+def getMask(r1,image):
+    mask = r1['masks'][:, :, i]
+    blackMask = np.dstack([image[:,:,0]*mask,image[:,:,1]*mask,image[:,:,2]*mask]) 
+    invMask = np.logical_not(mask)
+    whiteBg = 255*np.dstack((invMask,invMask,invMask))
+    masked_image = (blackMask+whiteBg)
+    return masked_image.astype(np.uint8)
 
 
 @app.route('/', defaults={'path': ''})

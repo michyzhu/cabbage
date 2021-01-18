@@ -10,7 +10,7 @@ function ProducePage() {
     const [file, setFile] = useState("")
     const [filename, setFilename] = useState("")
     const [display,setDisplay] = useState("")
-    const [result, setResult] = useState("")
+    const [predictions, setPredictions] = useState([])
     useEffect(async () => {
         // nothing
     },[])
@@ -33,6 +33,8 @@ function ProducePage() {
 
     const onSubmit = event => {
         event.preventDefault()
+        setDisplay("")
+        setPredictions([])
         const formData = new FormData()
         formData.append('file', file)
         formData.append('filename', filename)
@@ -40,25 +42,22 @@ function ProducePage() {
         fetch('http://localhost:5000/upload', {
             method: 'POST',
             body: formData,
-            }).then((response) => response.json()).then(response => {
-                console.log(response.url)
-                setDisplay(<img src={response.url} alt='image should show here'/>)
-            }).then(() => {
-                fetch(`/predict?imgPath=${filename}`).then(res => res.json()).then(data => {
-                    console.log(data.predictions)
-                    setResult(data.predictions)
-                })
-            }
-
-        // axios.post("https://rottenfresh.herokuapp.com/api/user-profile", formData, {
-        // }).then(async res => {
-        //     const {profileImg} = res.data.userCreated
-        //     setDisplay(<img src={profileImg} alt='image should show here'/>)
-        //     fetch(`/mask?imgPath=${profileImg}`).then(res => res.json()).then(data => {
-        //         console.log(data.predictions)
-        //         setResult(data.predictions)
-        //     })
-        // })
+        }).then((response) => response.json()).then(response => {
+            console.log(response.url)
+            setDisplay(<img src={response.url} alt='image should show here'/>)
+        }).then(() => {
+            fetch(`/predict?imgPath=${filename}`).then(res => res.json()).then(data => {
+                const newPredictions = []
+                console.log(data.predictions)
+                // data.predictions = [{p1:ans,p2:ans,p3:ans}, {p1:ans,p2:ans,p3:ans}, etc]
+                for(var i=0; i < data.predictions.length; i++) {
+                    var fruit = data.predictions[i].predictedFruitOfAll
+                    var fresh = data.predictions[i].predictedFreshness
+                    newPredictions.push(<p key={i}>prediction: your {fruit} is {fresh}</p>)
+                }
+                setPredictions(newPredictions)
+            })
+        })
     }
 
     const toggleText = () => {
@@ -96,11 +95,8 @@ function ProducePage() {
                 <br/><br/>
                 <button onClick={onSubmit}>evaluate</button>
                 <br/><br/>
-                {result === "" && display !== "" && <p> loading prediction... </p>}
-                {result !== "" && <p> 
-                    prediction: your {result["predictedFruitOfAll"]} is {result["predictedFreshness"]}  
-                </p>}
-                {/* {result !== "" && <p> prediction: {result} </p>} */}
+                {predictions.length === 0 && display !== "" && <p> loading prediction... </p>}
+                {predictions.length !== 0 && predictions}
                 <br/>
                 <div className="imagegoeshere">
                     {display !== "" && display}
