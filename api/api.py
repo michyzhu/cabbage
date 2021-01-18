@@ -26,8 +26,8 @@ CORS(app)
 mongo = PyMongo(app)
 
 if __name__ == "__main__":
-    app.run(debug=True,port=5000)
-    #app.run(debug=True,port=process.env.PORT)
+    #app.run(debug=True,port=5000)
+    app.run(debug=True,port=process.env.PORT or 5000)
 
 @app.route('/upload', methods=['POST'])
 @cross_origin()
@@ -182,3 +182,7 @@ def getMask(r1,image):
 def index(path):
   '''Return index.html for all non-api routes'''
   return send_from_directory(app.static_folder, 'index.html')
+
+@app.errorhandler(404)
+def not_found(e):
+    return app.send_static_file('index.html')
