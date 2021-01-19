@@ -1,1 +1,1 @@
-web: gunicorn --chdir api api:app
+web: gunicorn --chdir api api:app --error-logfile /var/log/gunicorn/error.log --access-logfile /var/log/gunicorn/access.log --capture-output --log-level debug
