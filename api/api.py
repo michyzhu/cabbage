@@ -27,7 +27,7 @@ mongo = PyMongo(app)
 
 if __name__ == "__main__":
     #app.run(debug=True,port=5000)
-    app.run(debug=True,port=process.env.PORT or 5000)
+    app.run(debug=True,port=process.env.PORT)
 
 @app.route('/upload', methods=['POST'])
 @cross_origin()

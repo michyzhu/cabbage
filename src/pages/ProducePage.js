@@ -1,7 +1,5 @@
 import "../css/ProducePage.css"
 import React, {useState, useEffect} from 'react'
-import axios from 'axios'
-// import BackToHomeButton from '../components/BackToHomeButton'
 import Footer from '../components/Footer'
 import Navbar from "../components/Navbar"
 import { v4 as uuidv4 } from 'uuid';
@@ -18,18 +16,7 @@ function ProducePage() {
     const onFileChange = event => {
         setFile(event.target.files[0])
         setFilename(uuidv4() + '-' + event.target.files[0].name)
-        //setDisplay(<img src={file} alt='image should show here'/>)
     }
-
-// setDisplay(<p>{body.result}</p>)
-                
-                // fetch(`http://localhost:500/file/${file}`, {
-                //     method: 'GET'
-                // }).then((response) => {
-                //     response.json().then((body) => {
-                //         setDisplay(<img src={`http://localhost:5000/${body.file}`} alt='image should show here'/>)
-                //     })
-                // })
 
     const onSubmit = event => {
         event.preventDefault()
@@ -59,19 +46,6 @@ function ProducePage() {
             })
         })
     }
-
-    const toggleText = () => {
-        var text = document.getElementById("demo");
-        if (text.style.display === "none") {
-          text.style.display = "block";
-        } else {
-          text.style.display = "none";
-        }
-      }
-
-    const onButtonClick = () => {
-        document.getElementById('loading').className="show"
-    }  
 
     return (
         <>
