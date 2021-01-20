@@ -1,1 +1,1 @@
-web: GUNICORN_CMD_ARGS="--graceful-timeout 1000 --workers=10" gunicorn wsgi:app
+web: GUNICORN_CMD_ARGS="--graceful-timeout 300 --workers=3" gunicorn wsgi:app
