@@ -19,15 +19,15 @@ from flask import Flask, request, url_for, send_from_directory
 from flask_pymongo import PyMongo
 from flask_cors import CORS, cross_origin
 
-app = Flask(__name__, static_folder='../build')
+app = Flask(__name__, static_folder='../build', static_url_path='/')
 app.config["MONGO_URI"] = "mongodb+srv://cabbageDb:peachDb@cluster0.b6n76.mongodb.net/images?retryWrites=true&w=majority&ssl=true&ssl_cert_reqs=CERT_NONE"
 app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app)
 mongo = PyMongo(app)
 
-if __name__ == "__main__":
-    #app.run(debug=True,port=5000)
-    app.run(debug=True,port=process.env.PORT)
+# if __name__ == "__main__":
+#     #app.run(debug=True,port=5000)
+#     app.run(debug=True,port=process.env.PORT)
 
 @app.route('/upload', methods=['POST'])
 @cross_origin()
@@ -177,11 +177,15 @@ def getMask(r1,image):
     return masked_image.astype(np.uint8)
 
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def index(path):
-  '''Return index.html for all non-api routes'''
-  return send_from_directory(app.static_folder, 'index.html')
+# @app.route('/', defaults={'path': ''})
+# @app.route('/<path:path>')
+# def index(path):
+#   '''Return index.html for all non-api routes'''
+#   return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/')
+def index():
+  return app.send_static_file('index.html')
 
 @app.errorhandler(404)
 def not_found(e):
