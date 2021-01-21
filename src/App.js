@@ -16,7 +16,9 @@ import {
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="App" style={{
+        backgroundColor: "#f0d3ae"
+      }}>
         <Navbar />
         <Switch>
           <Route path='/' component={HomePage} exact/>

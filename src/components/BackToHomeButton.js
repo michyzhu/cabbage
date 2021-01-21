@@ -6,11 +6,11 @@ import {Link} from "react-router-dom"
 function BackToHomeButton() {
     return (
         <>
-        <Link to="/">
-            <button className="back-to-home">
+        <button className="back-to-home">
+            <Link to="/">
                 <p>back to home</p>
-            </button>
-        </Link>
+            </Link>
+        </button>
         </>
     )
 }

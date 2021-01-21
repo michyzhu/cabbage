@@ -1,0 +1,52 @@
+.home {
+    position: absolute;
+    padding-top: 6%;
+    padding-left: 10%;
+    padding-bottom: 3.5rem;
+  }
+  
+  .home h1 {
+    color: #07714c;
+    font-family: "Metropolis_ExtraBold";
+    font-size: 130px;
+    line-height: 100%;
+  }
+  
+  .home p {
+    color: #07714c;
+    font-family: "Metropolis_Medium";
+    font-size: 35px;
+    text-align: left;
+  }
+  
+  .main-button {
+    background-color: #07714c;
+    padding: 10px 25px; 
+    border: none;
+    border-radius: 40px;
+    float: left;
+    /* margin-top: 10px; */
+  }
+  
+  .main-button a {
+    color: #f0d3ae;
+    font-family: "Metropolis_ExtraBold";
+    padding-left: 0px;
+    padding-top: 15px;
+    font-size:30px;
+    text-align: center;
+    margin: none;
+    line-height: 40px;
+  }
+
+  .main-button a:hover {
+    color: #f0d3ae;
+    font-family: "Metropolis_ExtraBold";
+    padding-left: 0px;
+    padding-top: 15px;
+    font-size:30px;
+    text-align: center;
+    margin: none;
+    line-height: 40px;
+    text-decoration: none;
+  }

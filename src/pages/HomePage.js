@@ -1,8 +1,11 @@
+import "../css/HomePage.css"
 import React from 'react'
 // import {Button} from 'semantic-ui-react'
 import {Link} from "react-router-dom"
 import Navbar from "../components/Navbar"
 import InvisibleFooter from "../components/InvisibleFooter"
+import Footer from "../components/Footer"
+
 
 function HomePage() {
     return (
@@ -14,15 +17,13 @@ function HomePage() {
                 <h1>produce?</h1>
                 <br/>
                 <p>let us judge how ugly your produce is.</p>
-                {/* <br/> */}
-                <Link to="/app">
-                    <button className="main-button">
-                        <p>try it</p>
-                    </button>
-                </Link>
                 <br/>
+                {/* <Link to="/app"> */}
+                    <button className="main-button">
+                        <a href="/app">try it</a>
+                    </button>
+                {/* </Link> */}
             </div>
-            <InvisibleFooter/>
         </div>
         </>
     )

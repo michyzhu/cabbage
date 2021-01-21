@@ -67,7 +67,7 @@
   width:120px;
 }
 
-.back-to-home {
+/* .back-to-home {
   border: 2px solid black;
   background-color: #f0d3ae;
   color: black;
@@ -76,7 +76,7 @@
   border-radius: 18px;
 }
 
-.back-to-home p {
+.back-to-home a {
   color: #07714c;
   font-family: "Metropolis_ExtraBold";
   padding-top: 12px;
@@ -85,55 +85,34 @@
   margin: none;
 }
 
-.home {
-  position: absolute;
-  padding-top: 6%;
-  padding-left: 10%;
-}
-
-.home h1 {
-  color: #07714c;
+.back-to-home a:hover {
+  color: #91b934;
   font-family: "Metropolis_ExtraBold";
-  font-size: 130px;
-  line-height: 100%;
-}
-
-.home p {
-  color: #07714c;
-  font-family: "Metropolis_Medium";
-  font-size: 35px;
-  text-align: left;
-}
-
-.main-button {
-  background-color: #07714c;
-  padding: 0px 25px; 
-  border: none;
-  border-radius: 40px;
-  float: left;
-  margin-top: 10px;
-}
-
-.main-button p {
-  color: #f0d3ae;
-  font-family: "Metropolis_ExtraBold";
-  padding-left: 0px;
-  padding-top: 15px;
-  font-size:30px;
+  padding-top: 12px;
+  font-size:17px;
   text-align: center;
   margin: none;
-  line-height: 40px;
-}
+} */
 
 .footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 3.5rem;
+}
+
+.footer a {
   /* padding-bottom: 10%; */
   color: #064730;
   font-family: "Metropolis_Regular";
   text-decoration: underline;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 2.5rem;
+}
+
+.footer a:hover {
+  /* padding-bottom: 10%; */
+  color: #91b934;
+  font-family: "Metropolis_Regular";
+  text-decoration: underline;
 }
 
 h1 {
