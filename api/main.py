@@ -97,7 +97,7 @@ def mask():
     filename = request.args.get("imgPath")
     print(filename)
     #imagePath = " + filename
-    imagePath = "http://localhost:5000/" + url_for('file',filename=filename)
+    imagePath = "https://peachyproduce.herokuapp.com/" + url_for('file',filename=filename)
     
     with urllib.request.urlopen(imagePath) as url:
         s = url.read()
