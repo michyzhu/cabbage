@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/kxshaw4869.github.io/static/css/main.e2c9e956.chunk.css",
+    "main.js": "/kxshaw4869.github.io/static/js/main.72f44753.chunk.js",
+    "main.js.map": "/kxshaw4869.github.io/static/js/main.72f44753.chunk.js.map",
+    "runtime-main.js": "/kxshaw4869.github.io/static/js/runtime-main.8c081495.js",
+    "runtime-main.js.map": "/kxshaw4869.github.io/static/js/runtime-main.8c081495.js.map",
+    "static/css/2.ae9f1eb3.chunk.css": "/kxshaw4869.github.io/static/css/2.ae9f1eb3.chunk.css",
+    "static/js/2.eead3192.chunk.js": "/kxshaw4869.github.io/static/js/2.eead3192.chunk.js",
+    "static/js/2.eead3192.chunk.js.map": "/kxshaw4869.github.io/static/js/2.eead3192.chunk.js.map",
+    "static/js/3.b71ece70.chunk.js": "/kxshaw4869.github.io/static/js/3.b71ece70.chunk.js",
+    "static/js/3.b71ece70.chunk.js.map": "/kxshaw4869.github.io/static/js/3.b71ece70.chunk.js.map",
+    "index.html": "/kxshaw4869.github.io/index.html",
+    "static/css/2.ae9f1eb3.chunk.css.map": "/kxshaw4869.github.io/static/css/2.ae9f1eb3.chunk.css.map",
+    "static/css/main.e2c9e956.chunk.css.map": "/kxshaw4869.github.io/static/css/main.e2c9e956.chunk.css.map",
+    "static/js/2.eead3192.chunk.js.LICENSE.txt": "/kxshaw4869.github.io/static/js/2.eead3192.chunk.js.LICENSE.txt",
+    "static/media/logo.2fc846d7.png": "/kxshaw4869.github.io/static/media/logo.2fc846d7.png",
+    "static/media/BotPage.css": "/kxshaw4869.github.io/static/media/metropolis-regular.67a1988d.otf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8c081495.js",
+    "static/css/2.ae9f1eb3.chunk.css",
+    "static/js/2.eead3192.chunk.js",
+    "static/css/main.e2c9e956.chunk.css",
+    "static/js/main.72f44753.chunk.js"
+  ]
+}
