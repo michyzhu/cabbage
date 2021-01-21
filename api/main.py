@@ -1,7 +1,3 @@
-from keras.models import load_model
-from mrcnn.config import Config
-from mrcnn import model as modellib
-from mrcnn import visualize
 import cv2
 import urllib
 import urllib.request
@@ -14,6 +10,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
 from skimage.measure import find_contours
+from tensorflow.keras.models import load_model
+from mrcnn.config import Config
+from mrcnn import model as modellib
+from mrcnn import visualize
 
 from flask import Flask, request, url_for, send_from_directory
 from flask_pymongo import PyMongo
@@ -48,8 +48,9 @@ def file(filename):
 
 # MASK-RCNN STUFF
 models = {}
-for mod in {"mobile36.h5","aboModel.h5", "model.h5", "applesModel.h5", "bananasModel.h5", "orangesModel.h5"}:
-    models[mod] = load_model(mod)
+os.chdir("cabbage/api/")
+# for mod in {"mobile36.h5","aboModel.h5", "model.h5"}: #, "applesModel.h5", "bananasModel.h5", "orangesModel.h5"}:
+#     models[mod] = load_model(mod)
 
 fruits = ["apple","banana","orange"]
 
