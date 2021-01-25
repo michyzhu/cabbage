@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## To Run
 
 In the project directory, you can run:
 
@@ -11,60 +11,24 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Clone the repository
+Run `pip install -r requirements.txt` and `npm install` for the required node packages
+To run on localhost, run `npm start`
 
-### `npm test`
+## About This App
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+For the sake of documentation (and a personal reflection), we’ll delve into some things we did and dealt with here.
 
-### `npm run build`
+peachyproduce originated as an attempt by two friends to explore web development, basic ML pertaining to computer vision methods, and effective UI/UX design. The goal was an application that takes in an image of produce, classifies what type of produce it is, and determines whether the produce was fresh or rotten; this touches(albeit shallowly) upon an existing field of research within agriculture and crop evaluation. The React/Flask app interfaces with a mongodb database, which serves to store the images uploaded to our app.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Frontend/Website Design
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+On the web development side, we decided early on that we wanted to use ReactJS for the frontend. We went through a myriad of tutorials covering HTML, CSS, Javascript, and ReactJS for fundamental knowledge; then, we built the website with create-react-app. For the actual design of the website, we analyzed others’ online portfolios and web applications, eventually sticking with a classic minimalist look and an earthy color palette.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![website storyboard](https://github.com/michyzhu/cabbage/blob/master/websiteStoryboard.png?raw=true)
 
-### `npm run eject`
+### Backend/Model Deployment
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Our predictions depended upon two different ML models: the first was a transfer learning CNN model based upon MobileNetv3, which performed a categorical classification of images into 36 categories of fruits. Initially, we attempted to train upon the traditional [Fruit 360](https://www.kaggle.com/moltean/fruits) dataset, which sorted images into 131 categories of fruits. Since the Fruit 360 dataset contains images with white backgrounds, we additionally implemented instance segmentation using the [Mask-RCNN](https://github.com/matterport/Mask_RCNN) library in order to preprocess images and mask their backgrounds to white before putting them through the Fruit 360 dataset. However, these trials failed, as Mask-RCNN is not precise enough to outline fruits for effective predictions with Fruit 360. Therefore, we sought out the kaggle [Fruit and Vegetable Image Recognition dataset](https://www.kaggle.com/kritikseth/fruit-and-vegetable-image-recognition), which contains fruit images with noisy backgrounds and consequently don’t require any masking or hyper-effective background removal. We used Mask-RCNN to simply identify fruits’ ROIs and predict within its region. Our second ML model determined freshness; using [this kaggle dataset](https://www.kaggle.com/sriramr/fruits-fresh-and-rotten-for-classification), we used a basic CNN to perform a binary classification in determining whether fruits were fresh or rotten.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+To deploy the model, we initially attempted to use the relatively new tensorflow.js, a lightweight framework that integrates directly with the frontend. However, due to our need to use the Mask-RCNN library, we migrated from a Node.js to a Flask backend. Unfortunately, though our React/Node framework was successfully deployed to Heroku, we have as of now not pushed past [some annoying roadblocks](https://stackoverflow.com/questions/65819259/modulenotfounderror-no-module-named-tensorflow-when-i-test-my-flask-react-app) with regards to deploying our application through Flask and gunicorn.
